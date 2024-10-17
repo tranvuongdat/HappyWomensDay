@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <!-- END FONT -->
     <!-- <script src="libraries/page-flip.browser.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -14,7 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zoom.js/0.0.1/zoom.min.js" integrity="sha512-OhJxb3F/IiF96I1C2hoqRw8iu54GLjgaw/Bl0SRBuuK2qtPqgpKh5m15dSJxub1GwUgxVGzsBotW742Iva4Y6w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
     <link rel="stylesheet" href="style.css" />
-    <style type="text/css">
+    <!-- <style type="text/css">
         html,
         body {
             background-color: #efefef;
@@ -67,7 +73,7 @@
             max-width: 100%;
             height: 100%;
         }
-    </style>
+    </style> -->
     <title>Test Document</title>
 </head>
 
@@ -76,35 +82,27 @@
         Hello world!
     </h1> -->
 
-    <div class="wrapper">
+    <div class="container">
         <div class="aspect">
-            <div class="aspect-inner">
-                <div class="flipbook" id="flipbook">
-                    <div class="page"><img
-                            src="assets/01.jpg"
-                            draggable="false" alt="" /></div>
-                    <div class="page"><img
-                            src="assets/02.jpg"
-                            draggable="false" alt="" /></div>
-                    <div class="page"><img
-                            src="assets/03.jpg"
-                            draggable="false" alt="" /></div>
-                    <div class="page"><img
-                            src="assets/04.jpg"
-                            draggable="false" alt="" /></div>
-                    <div class="page"><img
-                            src="assets/05.jpg"
-                            draggable="false" alt="" /></div>
-                    <div class="page"><img
-                            src="assets/06.jpg"
-                            draggable="false" alt="" /></div>
+            <div class="aspect-inner"
+                style="width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; 
+                background-image: url(assets/background.jpg);
+                background-repeat: no-repeat;
+                background-size: 100vw 100vh;">
+                <div class="flipbook" id="flipbook" style="height: 90vh; width: 90vw;">
+                    <div class="cover">
+                        <div class="p-1 sm:p-3 md:p-5 lg:p-7 pacifico-regular text-3xl flex flex-col items-center text-white gap-3">
+                            <span>Chúc mừng ngày Phụ nữ Việt Nam<br/></span>
+                            <span>20/10/2024</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="controller.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
 
         var flipbookEL = document.getElementById('flipbook');
 
@@ -118,7 +116,7 @@
             autoCenter: true
         });
 
-    </script>
+    </script> -->
 </body>
 
 </html>
