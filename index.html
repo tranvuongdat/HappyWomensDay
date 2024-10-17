@@ -1,67 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>   
-    <link rel="stylesheet" href="style.css"/>
+    <!-- <script src="libraries/page-flip.browser.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="libraries/turn.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js" integrity="sha512-rCjfoab9CVKOH/w/T6GbBxnAH5Azhy4+q1EXW5XEURefHbIkRbQ++ZR+GBClo3/d3q583X/gO4FKmOFuhkKrdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.js" integrity="sha512-9ocft8BVEGO4YnjEW4Tkq0+d3Usuax+GF922LJML/Q5ZLmtu9hgBbUZTxKXAkm+hzIHoC3I+vYha66opI9AuSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zoom.js/0.0.1/zoom.min.js" integrity="sha512-OhJxb3F/IiF96I1C2hoqRw8iu54GLjgaw/Bl0SRBuuK2qtPqgpKh5m15dSJxub1GwUgxVGzsBotW742Iva4Y6w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <link rel="stylesheet" href="style.css" />
     <style type="text/css">
-        body{
-            background:#ccc;
+        html,
+        body {
+            background-color: #efefef;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
         }
-        #magazine{
-            width:1152px;
-            height:752px;
+
+        .wrapper {
+            align-items: center;
+            display: flex;
+            height: 90%;
+            justify-content: center;
+            margin: 5%;
+            width: 90%;
         }
-        #magazine .turn-page{
-            background-color:#ccc;
-            background-size:100% 100%;
+
+        .aspect {
+            padding-bottom: 70%;
+            position: relative;
+            width: 100%;
+        }
+
+        .aspect-inner {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .flipbook {
+            height: 100%;
+            transition: margin-left 0.25s ease-out;
+            width: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .flipbook .page {
+            height: 100%;
+            width: 100%;
+        }
+
+        .flipbook .page img {
+            max-width: 100%;
+            height: 100%;
         }
     </style>
     <title>Test Document</title>
 </head>
+
 <body>
     <!-- <h1 class="text-3xl font-bold underline">
         Hello world!
     </h1> -->
 
-    <div id="magazine">
-        <div style="background-image:url(assets/01.jpg);"></div>
-        <div style="background-image:url(assets/02.jpg);"></div>
-        <div style="background-image:url(assets/03.jpg);"></div>
-        <div style="background-image:url(assets/04.jpg);"></div>
-        <div style="background-image:url(assets/05.jpg);"></div>
-        <div style="background-image:url(assets/06.jpg);"></div>
+    <div class="wrapper">
+        <div class="aspect">
+            <div class="aspect-inner">
+                <div class="flipbook" id="flipbook">
+                    <div class="page"><img
+                            src="assets/01.jpg"
+                            draggable="false" alt="" /></div>
+                    <div class="page"><img
+                            src="assets/02.jpg"
+                            draggable="false" alt="" /></div>
+                    <div class="page"><img
+                            src="assets/03.jpg"
+                            draggable="false" alt="" /></div>
+                    <div class="page"><img
+                            src="assets/04.jpg"
+                            draggable="false" alt="" /></div>
+                    <div class="page"><img
+                            src="assets/05.jpg"
+                            draggable="false" alt="" /></div>
+                    <div class="page"><img
+                            src="assets/06.jpg"
+                            draggable="false" alt="" /></div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script src="controller.js"></script>
     <script type="text/javascript">
 
-        $(window).ready(function() {
-            $('#magazine').turn({
-                display: 'double',
-                acceleration: true,
-                gradients: !$.isTouch,
-                elevation:50,
-                when: {
-                    turned: function(e, page) {
-                        /*console.log('Current view: ', $(this).turn('view'));*/
-                    }
-                }
-            });
+        var flipbookEL = document.getElementById('flipbook');
+
+        window.addEventListener('resize', function (e) {
+            flipbookEL.style.width = '';
+            flipbookEL.style.height = '';
+            $(flipbookEL).turn('size', flipbookEL.clientWidth, flipbookEL.clientHeight);
         });
-        
-        
-        $(window).bind('keydown', function(e){
-            
-            if (e.keyCode==37)
-                $('#magazine').turn('previous');
-            else if (e.keyCode==39)
-                $('#magazine').turn('next');
-                
+
+        $(flipbookEL).turn({
+            autoCenter: true
         });
-    
+
     </script>
 </body>
+
 </html>
